@@ -1,22 +1,22 @@
-🧵 Case Study – Texture Tales SQL Project
-📌 Overview
+ ## 🧵 Case Study – Texture Tales SQL Project
+# 📌 Overview
 
 
-This project analyzes sales transactions from Texture Tales, focusing on revenue, discounts, and product performance. Using SQL, we answer 12 business case study questions that provide insights into customer behavior, membership value, and best-performing products.
+## This project analyzes sales transactions from Texture Tales, focusing on revenue, discounts, and product performance. Using SQL, we answer 12 business case study questions that provide insights into customer behavior, membership value, and best-performing products.
 
-The project demonstrates SQL proficiency with:
+## The project demonstrates SQL proficiency with:
 
-Joins between sales and product_details
+- Joins between sales and product_details
 
-Aggregations and grouping
+- Aggregations and grouping
 
-Common Table Expressions (CTEs)
+- Common Table Expressions (CTEs)
 
-Window functions (MySQL 8+)
+- Window functions (MySQL 8+)
 
-Business-driven insights
+# Business-driven insights
 
-📂 Database Schema
+# 📂 Database Schema
 sales table
 Column	Description
 txn_id	Unique transaction ID
@@ -35,37 +35,37 @@ category_id	Category identifier
 category_name	Category name
 🛠️ Case Study Questions
 
-1.What was the total quantity sold for all products?
+ # 1.What was the total quantity sold for all products?
 
-2.What is the total generated revenue for all products before discounts?
+ # 2.What is the total generated revenue for all products before discounts?
 
-3.What was the total discount amount for all products?
+ # 3.What was the total discount amount for all products?
 
-4.How many unique transactions were there?
+# 4.How many unique transactions were there?
 
-5.What are the average unique products purchased in each transaction?
+# 5.What are the average unique products purchased in each transaction?
 
-6.What is the average discount value per transaction?
+# 6.What is the average discount value per transaction?
 
-7.What is the average revenue for member transactions and non-member transactions?
+# 7.What is the average revenue for member transactions and non-member transactions?
 
-8.What are the top 3 products by total revenue before discount?
+# 8.What are the top 3 products by total revenue before discount?
 
-9.What are the total quantity, revenue, and discount for each segment?
+# 9.What are the total quantity, revenue, and discount for each segment?
 
-10.What is the top selling product for each segment?
+# 10.What is the top selling product for each segment?
 
--- Q1. Total quantity sold for all products
-SELECT 
-    details.product_name,
-    SUM(sales.qty) AS sale_counts
-FROM sales AS sales
-INNER JOIN product_details AS details
-    ON sales.prod_id = details.product_id
-GROUP BY details.product_name
-ORDER BY sale_counts DESC;
 
--- Q7. Average revenue for member and non-member transactions
+<pre> ```sql -- Q1. Total quantity sold for all products 
+    SELECT 
+          details.product_name, 
+          SUM(sales.qty) AS sale_counts 
+    FROM sales AS sales 
+    INNER JOIN product_details AS details ON sales.prod_id = details.product_id 
+    GROUP BY details.product_name 
+    ORDER BY sale_counts DESC; ``` </pre>;
+
+<pre> ''' sql -- Q7. Average revenue for member and non-member transactions
 WITH cte_member_revenue AS (
   SELECT
     member,
@@ -78,7 +78,7 @@ SELECT
   member,
   ROUND(AVG(revenue), 2) AS avg_revenue
 FROM cte_member_revenue
-GROUP BY member;
+GROUP BY member;'''</pre>
 
 🚀 How to Run the Project
 

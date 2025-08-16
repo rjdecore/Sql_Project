@@ -1,5 +1,6 @@
-🧵 Case Study 4 – Texture Tales SQL Project
+🧵 Case Study – Texture Tales SQL Project
 📌 Overview
+
 
 This project analyzes sales transactions from Texture Tales, focusing on revenue, discounts, and product performance. Using SQL, we answer 12 business case study questions that provide insights into customer behavior, membership value, and best-performing products.
 

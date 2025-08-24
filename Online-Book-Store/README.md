@@ -98,7 +98,7 @@ Total_Amount	Order total (price × quantity)
 
 - Calculate the stock remaining after fulfilling all orders.
 
-📊 Example Queries
+# 📊 Example Queries
 <pre>''' sql -- Q1. Retrieve all books in the "Fiction" genre
 SELECT * 
 FROM Books
@@ -116,24 +116,24 @@ GROUP BY o.Book_ID, b.Title
 ORDER BY Order_Count DESC
 LIMIT 1;</pre>'''
 
-🚀 Insights
+# 🚀 Insights
 
-Fiction and Fantasy genres dominate in volume and price.
+- Fiction and Fantasy genres dominate in volume and price.
 
-High-value customers are concentrated in specific cities.
+- High-value customers are concentrated in specific cities.
 
-Certain authors consistently generate high book sales.
+- Certain authors consistently generate high book sales.
 
-Revenue analysis shows the most frequently ordered and high-value books.
+- Revenue analysis shows the most frequently ordered and high-value books.
 
-Stock tracking highlights low-stock books requiring replenishment.
+- Stock tracking highlights low-stock books requiring replenishment.
 
-🛠️ Tech Stack
+# 🛠️ Tech Stack
 
-Database: PostgreSQL / MySQL
+- **Database:** - PostgreSQL / MySQL
 
-Tools: pgAdmin / MySQL Workbench
+- **Tools:** - pgAdmin / MySQL Workbench
 
-SQL Concepts: Aggregations, Joins, Grouping, CTEs, Advanced filtering
+**SQL Concepts:** - Aggregations, Joins, Grouping, CTEs, Advanced filtering
 
 

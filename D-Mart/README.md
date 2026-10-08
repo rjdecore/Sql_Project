@@ -1,42 +1,50 @@
-# 🛒 Data Mart SQL Case Study
+# Data Mart Sales & Performance Analysis — SQL
 
-## Project Overview
+## Business Context
 
-**Project Title**: Data Mart Sales & Performance Analysis  
-**Level**: Intermediate  
-**Database**: `data_mart`  
+This project analyzes Data Mart's weekly sales data before and after its sustainability initiative in June 2020, with the goal of understanding sales performance across time, region, platform, customer segment, age band, and demographic.
 
-This project is based on **Case Study #1 from 8 Week SQL Challenge**, analyzing weekly sales data from **Data Mart**.  
-The focus is to measure sales performance before and after the **sustainability initiative in June 2020**, where Data Mart switched to eco-friendly packaging across all business areas.  
+The project is structured as a practical SQL case study rather than a collection of isolated queries.
 
----
+## Business Questions
 
-## Schema
+The analysis answers questions such as:
 
-We use the `weekly_sales` table:
+- Which week numbers are missing from the dataset?
+- How many transactions were recorded in each year?
+- What are monthly sales by region?
+- How do Retail and Shopify compare in sales contribution?
+- How does sales mix vary by demographic and year?
+- Which age-band and demographic combinations contribute most to Retail sales?
 
-| Column       | Data Type    |
-|--------------|-------------|
-| week_date    | DATE        |
-| region       | VARCHAR(20) |
-| platform     | VARCHAR(20) |
-| segment      | VARCHAR(10) |
-| customer     | VARCHAR(20) |
-| transactions | INT         |
-| sales        | INT         |
+## Data & Schema
 
----
+Primary table: `weekly_sales`
 
-## Data Cleaning (SQL)
+| Column | Description |
+|---|---|
+| `week_date` | Weekly sales date |
+| `region` | Sales region |
+| `platform` | Retail or Shopify |
+| `segment` | Customer segment code |
+| `customer_type` | Customer classification |
+| `transactions` | Transaction count |
+| `sales` | Sales value |
 
-A new table **`clean_weekly_sales`** is generated with the following transformations:  
-- ✅ Added `week_number` (1–52) based on `week_date`.  
-- ✅ Added `month_number` for each `week_date`.  
-- ✅ Added `calendar_year` (2018, 2019, 2020).  
-- ✅ Created `age_band` from segment codes (1 = Young Adults, 2 = Middle Aged, 3/4 = Retirees).  
-- ✅ Created `demographic` (C = Couples, F = Families).  
-- ✅ Replaced NULLs with `"unknown"` in `segment`, `age_band`, and `demographic`.  
-- ✅ Calculated `avg_transaction = sales / transactions` (rounded to 2 decimals).  
+## SQL Data Preparation
+
+A cleaned table, `clean_weekly_sales`, is created before analysis.
+
+Transformations include:
+
+- Deriving week, month, and calendar year from `week_date`
+- Translating segment codes into age bands
+- Translating segment prefixes into demographic groups
+- Handling unknown segment values
+- Calculating average transaction value
+- Creating a reusable analysis layer instead of repeating cleaning logic in every query
+
+Example:
 
 ```sql
 CREATE TABLE clean_weekly_sales AS
@@ -51,16 +59,44 @@ SELECT
     CASE
         WHEN RIGHT(segment, 1) = '1' THEN 'Young Adults'
         WHEN RIGHT(segment, 1) = '2' THEN 'Middle Aged'
-        WHEN RIGHT(segment, 1) IN ('3','4') THEN 'Retirees'
-        ELSE 'unknown'
+        WHEN RIGHT(segment, 1) IN ('3', '4') THEN 'Retirees'
+        ELSE 'Unknown'
     END AS age_band,
     CASE
         WHEN LEFT(segment, 1) = 'C' THEN 'Couples'
         WHEN LEFT(segment, 1) = 'F' THEN 'Families'
-        ELSE 'unknown'
+        ELSE 'Unknown'
     END AS demographic,
-    customer,
+    customer_type,
     transactions,
     sales,
-    ROUND(CAST(sales AS DECIMAL) / NULLIF(transactions,0), 2) AS avg_transaction
+    ROUND(sales / NULLIF(transactions, 0), 2) AS avg_transaction
 FROM weekly_sales;
+```
+
+## SQL Techniques Demonstrated
+
+- Data cleaning and transformation
+- Date functions
+- Aggregations and grouping
+- Conditional logic with `CASE`
+- Common Table Expressions (CTEs)
+- Window functions
+- Percentage calculations
+- Ranking and sorting
+- Sequence generation for missing-week analysis
+
+## Why This Project Matters
+
+The project demonstrates how SQL can move from raw transactional data to a reusable analytical dataset and then answer business questions around sales mix, channel performance, customer segments, and time-based trends.
+
+## Repository Files
+
+- `data_mart_schema.sql` — source dataset/schema
+- `data_mart_solution.sql` — cleaning and analytical SQL solutions
+- `Data_Mart_Solutions.docx` — supporting solution document
+- `Case Study 1 Data Mart.pdf` — case-study reference
+
+## Tech Stack
+
+**MySQL | SQL | CTEs | Window Functions | Data Cleaning | Business Analysis**

@@ -31,3 +31,12 @@ This project is useful for explaining how messy multi-valued fields such as coun
 
 ## Tech Stack
 **SQL | CTEs | Window Functions | String Functions | Date Analysis | EDA**
+
+## Findings to Report
+Queries surface the movie/TV-show mix, common ratings, represented countries and genres, long-running shows, frequent directors/actors and release-year patterns. These describe the catalog, not audience popularity or viewing performance.
+
+## Business Value
+Content teams can understand catalog composition and identify areas for further content-market research.
+
+## Report Artifact
+No project-specific PDF was identified in the repository listing. SQL solutions and source data are the reproducible artifacts.

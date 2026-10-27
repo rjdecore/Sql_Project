@@ -22,3 +22,12 @@ The project goes beyond SELECT queries and includes:
 
 ## Tech Stack
 **SQL | Aggregations | Procedures | Functions | Triggers | Data Cleaning | Performance Analysis**
+
+## Findings & Business Value
+The query outputs compare ratings, review volume, installs, free/paid categories and app-level performance. Add exact category or app leaders from executed SQL results; do not treat review correlation as proof of app quality.
+
+## Business Value
+Product teams can use the analysis to compare app categories, review pricing strategy and prioritize further quality investigation.
+
+## Report Artifact
+No project-specific PDF was identified in this folder; use the SQL scripts, notebook and source data.

@@ -40,3 +40,7 @@ Content teams can understand catalog composition and identify areas for further 
 
 ## Report Artifact
 No project-specific PDF was identified in the repository listing. SQL solutions and source data are the reproducible artifacts.
+
+
+## Reproducibility Note
+The committed `netflix_titles.csv` currently appears to be an empty placeholder (2 bytes in the repository tree). Restore the actual source CSV before running the SQL case study; the README's analytical questions do not substitute for source data.

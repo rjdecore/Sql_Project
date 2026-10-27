@@ -20,7 +20,7 @@ CREATE TABLE retail_sales
             );
 
 SELECT * FROM retail_sales
-LIMIT 10
+LIMIT 10;
 
 
     
@@ -31,7 +31,7 @@ FROM retail_sales
 
 -- Data Cleaning
 SELECT * FROM retail_sales
-WHERE transactions_id IS NULL
+WHERE transaction_id IS NULL
 
 SELECT * FROM retail_sales
 WHERE sale_date IS NULL
@@ -83,7 +83,7 @@ SELECT COUNT(*) as total_sale FROM retail_sales
 
 -- How many uniuque customers we have ?
 
-SELECT COUNT(DISTINCT customer_id) as total_sale FROM retail_sales
+SELECT COUNT(DISTINCT customer_id) AS unique_customers FROM retail_sales
 
 
 
@@ -123,7 +123,7 @@ WHERE
     AND 
     TO_CHAR(sale_date, 'YYYY-MM') = '2022-11'
     AND
-    quantity >= 4
+    quantity > 10
 
 
 -- Q.3 Write a SQL query to calculate the total sales (total_sale) for each category.

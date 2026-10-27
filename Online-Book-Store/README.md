@@ -12,7 +12,7 @@ Analyze books, customers and orders to understand revenue, product demand, custo
 The question-only file is for practice; the solved file contains the SQL answers. Both include setup and data-import examples.
 
 - [Practice questions](Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20%E2%80%93%20Project%20on%20SQL%20Only%20Questions.sql)
-- [Worked SQL solutions](Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20-%20SOLVED%20-%20Copy.sql)
+- [Worked SQL solutions](Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20%E2%80%93%20Project%20on%20SQL%20-%20SOLVED%20-%20Copy.sql)
 
 The core set covers Fiction books, publication year, Canadian customers, November 2023 orders, total stock, highest-priced book, multi-quantity orders, high-value orders, available genres, low-stock books and revenue. Advanced questions cover books sold by genre/author, Fantasy pricing, repeat customers, frequently ordered books, top-priced books, customer cities/spend and stock remaining after orders.
 

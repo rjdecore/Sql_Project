@@ -39,11 +39,11 @@ select * from clean_weekly_sales limit 10;
 
 create table seq100
 (x int not null auto_increment primary key);
-insert into seq100 values (),(),(),(),(),(),(),(),(),();
-insert into seq100 values (),(),(),(),(),(),(),(),(),();
-insert into seq100 values (),(),(),(),(),(),(),(),(),();
-insert into seq100 values (),(),(),(),(),(),(),(),(),();
-insert into seq100 values (),(),(),(),(),(),(),(),(),();
+INSERT INTO seq100 (x) VALUES (NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL);
+INSERT INTO seq100 (x) VALUES (NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL);
+INSERT INTO seq100 (x) VALUES (NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL);
+INSERT INTO seq100 (x) VALUES (NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL);
+INSERT INTO seq100 (x) VALUES (NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL),(NULL);
 insert into seq100 select x + 50 from seq100;
 select * from seq100;
 create table seq52 as (select x from seq100 limit 52);

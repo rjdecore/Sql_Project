@@ -1,112 +1,56 @@
 # Data Mart Sales & Performance Analysis — SQL
 
-## Business Context
+## Business context
+Analyze weekly sales before and after the June 2020 sustainability initiative, comparing region, platform, customer type, age band and demographic. The SQL file prepares a reusable cleaned table and then runs the business analyses.
 
-This project analyzes Data Mart's weekly sales data before and after its sustainability initiative in June 2020, with the goal of understanding sales performance across time, region, platform, customer segment, age band, and demographic.
+## Business questions and decision use
 
-The project is structured as a practical SQL case study rather than a collection of isolated queries.
+| Question | SQL approach | Business use |
+|---|---|---|
+| Which week numbers are missing? | Recursive CTE generating weeks 1–52 | Identify data-coverage gaps before trend reporting |
+| How do transaction totals vary by year? | Annual aggregation | Track transaction-volume changes |
+| What are sales by month and region? | Year + month + region grouping | Compare regional performance without mixing different years |
+| How do Retail and Shopify compare? | Monthly platform share | Review channel mix over time |
+| Which demographics contribute to sales? | Annual share using a window function | Describe sales mix by segment |
+| Which groups lead Retail sales? | Segment aggregation and revenue share | Focus customer-segment review |
+| How does regional sales change year over year? | LAG() and percentage change | Prioritize regions for deeper investigation |
+| Which customer types have the highest transaction value? | Weighted sales / transaction ratio | Compare transaction economics consistently |
 
-## Business Questions
+## Source schema
+The source table is weekly_sales.
 
-The analysis answers questions such as:
-
-- Which week numbers are missing from the dataset?
-- How many transactions were recorded in each year?
-- What are monthly sales by region?
-- How do Retail and Shopify compare in sales contribution?
-- How does sales mix vary by demographic and year?
-- Which age-band and demographic combinations contribute most to Retail sales?
-
-## Data & Schema
-
-Primary table: `weekly_sales`
-
-| Column | Description |
+| Column | Meaning |
 |---|---|
-| `week_date` | Weekly sales date |
-| `region` | Sales region |
-| `platform` | Retail or Shopify |
-| `segment` | Customer segment code |
-| `customer_type` | Customer classification |
-| `transactions` | Transaction count |
-| `sales` | Sales value |
+| week_date | Weekly sales date |
+| region | Sales region |
+| platform | Retail or Shopify |
+| segment | Customer segment code |
+| customer_type | Customer classification |
+| transactions | Transaction count |
+| sales | Sales value |
 
-## SQL Data Preparation
+## Data preparation
+data_mart_solution.sql creates clean_weekly_sales and:
+- Derives week, month and calendar year.
+- Maps segment codes to age bands and demographic labels.
+- Converts missing/literal null segment values to Unknown.
+- Calculates average transaction value using NULLIF to avoid division by zero.
+- Replaces the previous derived table on rerun.
 
-A cleaned table, `clean_weekly_sales`, is created before analysis.
+## Business impact
+The output can support weekly performance monitoring, channel-mix review, regional follow-up and customer-segment planning. The analyses are descriptive: they can identify where a change occurred, but cannot prove that the sustainability initiative caused it without a suitable comparison design.
 
-Transformations include:
+## Reproducibility and limitations
+- **SQL dialect:** MySQL 8.0+ (recursive CTE support required).
+- Load the source data/schema before running data_mart_solution.sql.
+- The missing-week query checks week numbers 1–52; confirm whether week 53 is relevant for the source calendar.
+- Exact findings should be quoted only after executing the queries against the supplied data. This README does not invent result totals.
 
-- Deriving week, month, and calendar year from `week_date`
-- Translating segment codes into age bands
-- Translating segment prefixes into demographic groups
-- Handling unknown segment values
-- Calculating average transaction value
-- Creating a reusable analysis layer instead of repeating cleaning logic in every query
+## Files
+- [SQL solution](data_mart_solution.sql)
+- [Schema/source SQL](data_mart_schema.sql)
+- [Case-study PDF](Case%20Study%201%20Data%20Mart.pdf)
+- Data_Mart_Solutions.docx — supporting solution document
 
-Example:
-
-```sql
-CREATE TABLE clean_weekly_sales AS
-SELECT
-    week_date,
-    WEEK(week_date) AS week_number,
-    MONTH(week_date) AS month_number,
-    YEAR(week_date) AS calendar_year,
-    region,
-    platform,
-    segment,
-    CASE
-        WHEN RIGHT(segment, 1) = '1' THEN 'Young Adults'
-        WHEN RIGHT(segment, 1) = '2' THEN 'Middle Aged'
-        WHEN RIGHT(segment, 1) IN ('3', '4') THEN 'Retirees'
-        ELSE 'Unknown'
-    END AS age_band,
-    CASE
-        WHEN LEFT(segment, 1) = 'C' THEN 'Couples'
-        WHEN LEFT(segment, 1) = 'F' THEN 'Families'
-        ELSE 'Unknown'
-    END AS demographic,
-    customer_type,
-    transactions,
-    sales,
-    ROUND(sales / NULLIF(transactions, 0), 2) AS avg_transaction
-FROM weekly_sales;
-```
-
-## SQL Techniques Demonstrated
-
-- Data cleaning and transformation
-- Date functions
-- Aggregations and grouping
-- Conditional logic with `CASE`
-- Common Table Expressions (CTEs)
-- Window functions
-- Percentage calculations
-- Ranking and sorting
-- Sequence generation for missing-week analysis
-
-## Why This Project Matters
-
-The project demonstrates how SQL can move from raw transactional data to a reusable analytical dataset and then answer business questions around sales mix, channel performance, customer segments, and time-based trends.
-
-## Repository Files
-
-- `data_mart_schema.sql` — source dataset/schema
-- `data_mart_solution.sql` — cleaning and analytical SQL solutions
-- `Data_Mart_Solutions.docx` — supporting solution document
-- `Case Study 1 Data Mart.pdf` — case-study reference
-
-## Tech Stack
-
-**MySQL | SQL | CTEs | Window Functions | Data Cleaning | Business Analysis**
-
-
-## Findings to Report
-Use the query outputs to identify the missing-week pattern, changes in sales by period, region and platform, and differences by age-band/demographic segment. Record exact values only from a successful query run; this README does not invent result totals.
-
-## Business Value
-Supports weekly sales monitoring, channel-mix review and customer-segment planning. It also demonstrates reusable SQL cleaning before business analysis.
-
-## Case Study / Report
-[Open the case-study PDF](Case%20Study%201%20Data%20Mart.pdf) and the [SQL solutions](data_mart_solution.sql).
+## Skills demonstrated
+MySQL, data cleaning, date functions, aggregations, CTEs, window functions, percentage calculations, LAG, segmentation and business interpretation.

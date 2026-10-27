@@ -1,4 +1,4 @@
-## Data Cleansing
+-- Data Cleansing
 CREATE TABLE clean_weekly_sales AS
 SELECT
   week_date,
@@ -33,9 +33,9 @@ FROM weekly_sales;
 
 select * from clean_weekly_sales limit 10;
 
-## Data Exploration
+-- Data Exploration
 
-## 1.Which week numbers are missing from the dataset?
+-- 1.Which week numbers are missing from the dataset?
 
 create table seq100
 (x int not null auto_increment primary key);
@@ -51,13 +51,13 @@ select distinct x as week_day from seq52 where x not in(select distinct week_num
 
 select distinct week_number from clean_weekly_sales;
 
-## 2.How many total transactions were there for each year in the dataset?
+-- 2.How many total transactions were there for each year in the dataset?
 SELECT
   calendar_year,
   SUM(transactions) AS total_transactions
 FROM clean_weekly_sales group by calendar_year;
 
-## 3.What are the total sales for each region for each month?
+-- 3.What are the total sales for each region for each month?
 
 SELECT
   month_number,
@@ -67,7 +67,7 @@ FROM clean_weekly_sales
 GROUP BY month_number, region
 ORDER BY month_number, region;
 
-## 4.What is the total count of transactions for each platform
+-- 4.What is the total count of transactions for each platform
 
 SELECT
   platform,
@@ -75,7 +75,7 @@ SELECT
 FROM clean_weekly_sales
 GROUP BY platform;
 
-## 5.What is the percentage of sales for Retail vs Shopify for each month?
+-- 5.What is the percentage of sales for Retail vs Shopify for each month?
 
 WITH cte_monthly_platform_sales AS (
   SELECT
@@ -101,7 +101,7 @@ FROM cte_monthly_platform_sales
 GROUP BY month_number,calendar_year
 ORDER BY month_number,calendar_year;
 
-## 6.What is the percentage of sales by demographic for each year in the dataset?
+-- 6.What is the percentage of sales by demographic for each year in the dataset?
 
 SELECT
   calendar_year,
@@ -122,7 +122,7 @@ ORDER BY
   calendar_year,
   demographic;
   
-## 7.Which age_band and demographic values contribute the most to Retail sales?
+-- 7.Which age_band and demographic values contribute the most to Retail sales?
 
 SELECT
   age_band,

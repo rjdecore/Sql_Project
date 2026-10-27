@@ -1,4 +1,4 @@
-name: SQL syntax validation
+name: SQL syntax and notebook validation
 
 on:
   pull_request:
@@ -19,3 +19,5 @@ jobs:
         run: sqlfluff parse --dialect mysql "D-Mart/data_mart_solution.sql"
       - name: Parse Retail Sales SQL
         run: sqlfluff parse --dialect mysql "Retail Sales Analysis/sql_query_p1.sql"
+      - name: Validate solution notebook JSON and Python syntax
+        run: python .github/scripts/validate_sql_notebooks.py

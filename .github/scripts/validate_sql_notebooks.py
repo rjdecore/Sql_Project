@@ -12,6 +12,8 @@ NOTEBOOKS = [
     Path("Retail Sales Analysis/Retail_Sales_SQL_Solutions_Findings.ipynb"),
     Path("Netflix Movies and TV Shows/Netflix_SQL_Solutions_Findings.ipynb"),
     Path("Spotify Advanced SQL Project/Spotify_SQL_Solutions_Findings.ipynb"),
+    Path("Online-Book-Store/Online_Bookstore_SQL_Solutions_Findings.ipynb"),
+    Path("Zepto-Ecommerce-Sales/Zepto_SQL_Solutions_Findings.ipynb"),
 ]
 
 

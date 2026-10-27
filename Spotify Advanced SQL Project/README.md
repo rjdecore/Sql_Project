@@ -1,100 +1,41 @@
 # Spotify Advanced SQL Analytics
 
-## Project Overview
+## Business objective
+Analyze track, artist and album attributes alongside stream, view, like and comment metrics. The project progresses from basic filters and aggregation to subqueries, CTEs and window functions.
 
-This project uses a Spotify track dataset to demonstrate progressively more advanced SQL analysis—from filtering and aggregation to subqueries, CTEs, window functions, and query-performance investigation.
+## Business questions
+- Which tracks exceed one billion streams?
+- Which artists and albums have the most recorded tracks?
+- What is the engagement volume for licensed tracks and official videos?
+- Which albums have higher average danceability or wider energy ranges?
+- Which tracks have the highest energy or liveness values?
+- How do recorded Spotify streams compare with YouTube views?
+- Which tracks rank in the top three views for each artist?
+- How concentrated are views and likes across the available rows?
 
-The objective is to answer business-style questions about track performance, artists, albums, engagement, and platform behavior while also demonstrating how SQL queries can be optimized.
+## SQL solutions and findings
+The [Spotify SQL Solutions & Findings notebook](Spotify_SQL_Solutions_Findings.ipynb) runs the analysis against the `spotify` table, displays results and generates findings from returned rows. It includes data checks, row-level counts, top-track rankings, album aggregates and a deterministic cumulative-likes calculation.
 
-## Dataset
+## Dataset and reproducibility
+The source table is `spotify`. Expected columns include `artist`, `track`, `album`, `album_type`, `danceability`, `energy`, `liveness`, `views`, `likes`, `comments`, `stream`, `licensed`, `official_video` and `most_played_on`.
 
-The main table is `spotify`, containing track, artist, album, audio-feature, engagement, and platform-related fields such as:
+Set MySQL connection variables in the environment and run the notebook against a populated table. Check missing values and duplicate track rows before presenting exact totals. The notebook does not fabricate outputs if the source data is unavailable.
 
-- `artist`
-- `track`
-- `album`
-- `album_type`
-- `danceability`
-- `energy`
-- `liveness`
-- `views`
-- `likes`
-- `comments`
-- `stream`
-- `licensed`
-- `official_video`
-- `most_played_on`
+## Query optimization
+The repository includes before/after EXPLAIN screenshots. They are evidence for a query-plan investigation, but claims about measured runtime improvement should be backed by comparable execution timings and plan details. An index is not automatically faster for every query.
 
-## Analytical Questions
+## Interpretation notes
+- Spotify streams and YouTube views may have different metric definitions and should be compared cautiously.
+- A track-level row count may include duplicates or multiple records for the same track.
+- Audio features such as energy and liveness are not direct measures of audience preference.
+- Cumulative likes are a running total across ordered rows, not an album or artist aggregate.
 
-### Basic
+## Files
+- [SQL query solutions](Query%20Solutions.sql)
+- [SQL solutions and findings notebook](Spotify_SQL_Solutions_Findings.ipynb)
+- [Spotify SQL analytics PDF](Spotify_SQL_Analytics.pdf)
+- [EXPLAIN before indexing](spotify_explain_before_index.png)
+- [EXPLAIN after indexing](spotify_explain_after_index.png)
 
-- Find tracks with more than 1 billion streams
-- Count tracks by artist
-- Identify single releases
-- Calculate licensed-track comments
-
-### Intermediate
-
-- Calculate average danceability by album
-- Find high-energy tracks
-- Aggregate views by album
-- Compare Spotify streams with YouTube views
-
-### Advanced
-
-- Find the top 3 viewed tracks for every artist
-- Compare track liveness with the dataset average
-- Calculate energy range by album using a CTE
-- Identify tracks with a high energy-to-liveness ratio
-- Calculate cumulative likes using a window function
-
-## SQL Techniques
-
-The project demonstrates:
-
-- SELECT / WHERE / ORDER BY
-- GROUP BY and aggregate functions
-- Subqueries
-- Common Table Expressions (CTEs)
-- `ROW_NUMBER()` with `PARTITION BY`
-- Windowed cumulative calculations
-- NULL-safe division
-- Conditional filtering
-- Indexing and execution-plan analysis
-
-Example — top 3 tracks per artist:
-
-```sql
-SELECT artist, track, views
-FROM (
-    SELECT
-        artist,
-        track,
-        views,
-        ROW_NUMBER() OVER (
-            PARTITION BY artist
-            ORDER BY views DESC
-        ) AS rn
-    FROM spotify
-) t
-WHERE rn <= 3;
-```
-
-## Query Optimization
-
-The repository includes before/after `EXPLAIN` evidence to investigate the effect of indexing and query optimization.
-
-This is important because the project is not limited to obtaining the correct answer—it also considers how SQL queries behave from a performance perspective.
-
-## Repository Files
-
-- `Query Solutions.sql` — analytical SQL queries
-- `spotify_explain_before_index.png` — execution-plan evidence before indexing
-- `spotify_explain_after_index.png` — execution-plan evidence after indexing
-- `Spotify_SQL_Analytics.pdf` — supporting project document
-- `spotify_graphical view *.png` — supporting visual outputs
-
-## Tech Stack
-
-**MySQL | SQL | CTEs | Window Functions | Subqueries | Query Optimization | EXPLAIN**
+## Stack
+MySQL 8.0+, CTEs, subqueries, window functions, ranking, aggregates, EXPLAIN and query-performance analysis.

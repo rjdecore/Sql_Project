@@ -29,3 +29,12 @@ The project includes CTAS, joins, conditional logic, date calculations, branch-l
 
 ## Tech Stack
 **SQL | Relational Database Design | Joins | Aggregations | CTAS | Stored Procedures | Business Reporting**
+
+## Findings to Report
+The query outputs can show the most frequently issued books, overdue/unreturned items, active members, employee issue activity and branch/category revenue. Populate any numeric finding only after running the supplied SQL against the included schema and data.
+
+## Business Value
+Library staff can monitor circulation, follow up on overdue items, improve book availability and compare branch activity.
+
+## Report Artifact
+No project-specific PDF was identified in the repository listing; the SQL solution and schema are the primary reproducible artifacts.

@@ -98,3 +98,13 @@ This is important because the project is not limited to obtaining the correct an
 ## Tech Stack
 
 **MySQL | SQL | CTEs | Window Functions | Subqueries | Query Optimization | EXPLAIN**
+
+
+## Findings & Business Value
+The query outputs are designed to identify high-stream tracks, artist-level volume, album engagement, platform differences and top tracks per artist. Record exact values from query execution; the SQL question list alone does not establish which artists or tracks lead.
+
+## Business Value
+Content analysts can compare catalog engagement and investigate differences between Spotify streams and YouTube views. The EXPLAIN comparison demonstrates a performance-investigation workflow; report measured runtime or plan changes only when supported by the recorded evidence.
+
+## Case Study / PDF
+[Open the Spotify SQL analytics PDF](Spotify_SQL_Analytics.pdf). Check that the cleaned dataset file is populated before using it to reproduce the queries.

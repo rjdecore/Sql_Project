@@ -3,7 +3,8 @@
 -- Load the source CSV into retail_sales after creating the table.
 -- Monetary fields use DECIMAL to avoid binary floating-point rounding.
 
-CREATE DATABASE sql_project_p2;
+CREATE DATABASE IF NOT EXISTS sql_project_p2;
+USE sql_project_p2;
 
 -- Run this DROP/CREATE block only when intentionally rebuilding the table.
 DROP TABLE IF EXISTS retail_sales;

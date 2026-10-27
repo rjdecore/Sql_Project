@@ -1,40 +1,44 @@
 # Retail Sales Analysis — SQL
 
-## Business Objective
-Analyze retail transactions to understand sales performance, customer behavior, product categories, monthly trends, and purchasing patterns.
+## Business objective
+Analyze transaction-level retail data to understand revenue, customer activity, category mix, high-value transactions, monthly performance and time-of-day demand.
 
-## Data Preparation
-The project creates a retail sales database and validates the dataset for missing values before analysis.
+## Business questions → solutions
 
-Key fields include transaction ID, sale date/time, customer, gender, age, category, quantity, unit price, COGS, and total sale.
+| # | Business question | Technique | Business use |
+|---:|---|---|---|
+| 1 | Which transactions occurred on 5 November 2022? | Date filter | Daily audit and event review |
+| 2 | Which Clothing transactions sold over 10 units in November 2022? | Half-open date range + filters | Large-quantity order investigation |
+| 3 | What are sales, transaction count and average transaction value by category? | Aggregation | Category and assortment review |
+| 4 | What is the average age of Beauty customers? | AVG | Descriptive customer profiling |
+| 5 | Which transactions exceed 1,000 in sales value? | Threshold filter | High-value transaction review |
+| 6 | How do sales and units vary by gender/category? | Multi-column grouping | Compare observed segment mix without assuming causation |
+| 7 | Which month has the highest total sales in each year? | CTE + DENSE_RANK | Seasonal planning based on revenue, not only average basket size |
+| 8 | Who are the top five customers by spend? | Aggregation + top-N | Customer follow-up and concentration review |
+| 9 | How many distinct customers buy from each category? | COUNT(DISTINCT ...) | Category reach comparison |
+| 10 | Which time-of-day shift contributes the most orders and revenue? | CASE + aggregation | Staffing and operating-hours review |
+| 11 | What share of revenue comes from each category? | Revenue-share calculation | Category prioritization |
+| 12 | How do sales vary by weekday? | Day-of-week grouping | Staffing and campaign planning |
+| 13 | How concentrated is revenue among the highest-spending 20% of customers? | NTILE(5) + window logic | Understand reliance on high-spend customers |
 
-## Business Questions
-- What are total sales and orders by category?
-- Which categories have the highest customer activity?
-- What is the average customer age by category?
-- Which transactions are high value?
-- What are the top customers by total sales?
-- Which month performs best in each year?
-- How does performance vary by gender and category?
-- Which shift—morning, afternoon, or evening—has the most orders?
+## Data fields
+retail_sales contains transaction ID, sale date/time, customer ID, gender, age, category, quantity, unit price, COGS and total sale.
 
-## SQL Techniques
-- Data cleaning
-- Aggregations
-- CASE expressions
-- Date/time extraction
-- GROUP BY / HAVING
-- Window functions and ranking
-- Customer segmentation
+## Data quality and safety
+The SQL first profiles nulls and suspicious values. It does not automatically delete records: review the result, document the business rule, back up the table and only then run the commented transaction-safe cleaning example. This avoids silently discarding potentially recoverable sales records.
 
-## Tech Stack
-**SQL | Retail Analytics | Aggregations | CASE | Window Functions | Date Analysis**
+## Business impact
+Use revenue, transaction volume, average transaction value, customer reach and customer concentration together. Results can guide category review, shift planning and customer follow-up, but descriptive patterns do not prove that a demographic or time slot caused a sales result.
 
-## Findings & Business Value
-The SQL questions are designed to identify sales and order totals by category, high-value transactions, top customers, strongest month per year and order volume by shift. The result set should supply the exact leaders and totals before they are quoted in a portfolio discussion.
+## Reproducibility and limitations
+- **SQL dialect:** MySQL 8.0+.
+- Create/load the source data before running analysis queries.
+- The script's table-creation block drops and recreates retail_sales; do not rerun it over valuable loaded data unless the table is backed up or intentionally being rebuilt.
+- The repository query file does not by itself provide executed output. State exact top categories, customers or totals only after running it on the dataset.
 
-## Business Value
-Retail managers can use the results to review category mix, identify valuable customers and plan staffing or campaigns around observed purchase patterns.
+## Files
+- [SQL analysis script](sql_query_p1.sql)
+- Source CSV / dataset (if included in this folder)
 
-## Report Artifact
-No PDF export was identified in this folder; use the SQL query file and source CSV to reproduce the analysis.
+## Skills demonstrated
+Data profiling, safe cleaning workflow, aggregation, CASE, date/time analysis, CTEs, ranking, NTILE, revenue-share calculations and business interpretation.

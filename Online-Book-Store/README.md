@@ -1,40 +1,29 @@
 # Online Bookstore Sales Analysis — SQL
 
-## Business Objective
-Analyze an online bookstore's books, customers, and orders to understand revenue, customer purchasing behavior, product demand, and inventory requirements.
+## Business objective
+Analyze books, customers and orders to understand revenue, product demand, customer value and inventory requirements.
 
-## Data Model
-The project uses three core entities:
-- **Books** — title, author, genre, publication year, price, stock
-- **Customers** — customer identity and location
-- **Orders** — order date, quantity, and total amount
+## Data model
+- **Books:** title, author, genre, publication year, price and stock.
+- **Customers:** customer identity and location.
+- **Orders:** order date, quantity and total amount.
 
-## Business Questions
-- Which genres generate the most sales?
-- What is total revenue?
-- Which books are ordered most frequently?
-- Which customers spend the most?
-- Which authors generate the highest book volume?
-- Which books have low remaining stock?
-- What is the remaining inventory after fulfilled orders?
+## Business questions and worked solutions
+The question-only file is for practice; the solved file contains the SQL answers. Both include setup and data-import examples.
 
-## SQL Skills
-- Joins
-- Aggregations
-- GROUP BY / HAVING
-- Filtering
-- Ranking and Top-N analysis
-- Inventory calculations
-- Customer-level analysis
+- [Practice questions](Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20%E2%80%93%20Project%20on%20SQL%20Only%20Questions.sql)
+- [Worked SQL solutions](Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20-%20SOLVED%20-%20Copy.sql)
 
-## Tech Stack
-**SQL | PostgreSQL/MySQL | Joins | Aggregations | Customer Analytics | Inventory Analysis**
+The core set covers Fiction books, publication year, Canadian customers, November 2023 orders, total stock, highest-priced book, multi-quantity orders, high-value orders, available genres, low-stock books and revenue. Advanced questions cover books sold by genre/author, Fantasy pricing, repeat customers, frequently ordered books, top-priced books, customer cities/spend and stock remaining after orders.
 
-## Findings to Report
-Use the query results to identify top-selling genres/books, high-spend customers, revenue totals and low-stock items. Numeric findings should be recorded from the executed queries, not estimated from the question text.
+## Business value
+These queries support assortment reviews, repeat-customer analysis, revenue summaries and inventory replenishment discussions. Stock remaining is only meaningful when the inventory snapshot and order-fulfillment assumptions are understood.
 
-## Business Value
-Supports product assortment decisions, customer-value analysis and inventory replenishment planning.
+## Important setup notes
+- **Dialect:** PostgreSQL. The scripts use psql's `\c` and `COPY`; adjust the import path for your machine and import method.
+- The setup includes DROP TABLE statements. Run them only when intentionally rebuilding tables, and back up any loaded data first.
+- Validate that each order references a valid customer and book, and confirm whether `Total_Amount` is line value or order value before interpreting revenue.
+- Numeric findings must come from executing the solution queries on the loaded data; they are not hard-coded in this README.
 
-## Report Artifact
-No project-specific PDF was identified; the schema, data and SQL queries are the reproducible deliverables.
+## Skills
+Joins, filtering, aggregation, GROUP BY/HAVING, ranking, top-N analysis, revenue calculation and inventory analysis.

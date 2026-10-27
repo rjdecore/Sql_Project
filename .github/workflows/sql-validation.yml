@@ -1,0 +1,21 @@
+name: SQL syntax validation
+
+on:
+  pull_request:
+  push:
+    branches: [main, hiring-ready-sql-readme]
+
+jobs:
+  parse-mysql-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install SQLFluff
+        run: python -m pip install sqlfluff
+      - name: Parse Data Mart SQL
+        run: sqlfluff parse --dialect mysql "D-Mart/data_mart_solution.sql"
+      - name: Parse Retail Sales SQL
+        run: sqlfluff parse --dialect mysql "Retail Sales Analysis/sql_query_p1.sql"

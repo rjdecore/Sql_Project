@@ -25,7 +25,8 @@ The [SQL Solutions Guide](SQL%20Solutions%20Guide.md) maps business questions to
 - [Retail Sales README](Retail%20Sales%20Analysis/README.md) · [SQL solutions](Retail%20Sales%20Analysis/sql_query_p1.sql) · [solutions & findings notebook](Retail%20Sales%20Analysis/Retail_Sales_SQL_Solutions_Findings.ipynb)
 - [Netflix README](Netflix%20Movies%20and%20TV%20Shows/README.md) · [15 SQL solutions](Netflix%20Movies%20and%20TV%20Shows/Solutions%20of%2015%20business%20problems.sql) · [solutions & findings notebook](Netflix%20Movies%20and%20TV%20Shows/Netflix_SQL_Solutions_Findings.ipynb)
 - [Spotify README](Spotify%20Advanced%20SQL%20Project/README.md) · [SQL solutions](Spotify%20Advanced%20SQL%20Project/Query%20Solutions.sql) · [solutions & findings notebook](Spotify%20Advanced%20SQL%20Project/Spotify_SQL_Solutions_Findings.ipynb)
-- [Online Bookstore questions](Online-Book-Store/Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20%E2%80%93%20Project%20on%20SQL%20Only%20Questions.sql) · [worked solutions](Online-Book-Store/Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20%E2%80%93%20Project%20on%20SQL%20-%20SOLVED%20-%20Copy.sql)
+- [Online Bookstore questions](Online-Book-Store/Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20%E2%80%93%20Project%20on%20SQL%20Only%20Questions.sql) · [worked solutions](Online-Book-Store/Day%20%E2%80%93%2030%20%E2%80%93%20SQL%20%E2%80%93%20Project%20on%20SQL%20-%20SOLVED%20-%20Copy.sql) · [solutions & findings notebook](Online-Book-Store/Online_Bookstore_SQL_Solutions_Findings.ipynb)
+- [Zepto README](Zepto-Ecommerce-Sales/README.md) · [safe SQL analysis](Zepto-Ecommerce-Sales/Zepto_SQL_data_analysis.sql) · [solutions & findings notebook](Zepto-Ecommerce-Sales/Zepto_SQL_Solutions_Findings.ipynb)
 
 ## Analytical workflow
 

@@ -1,11 +1,11 @@
 -- SQL Retail Sales Analysis
--- Dialect: PostgreSQL-compatible SQL
--- Load your source CSV into retail_sales before running the analysis queries.
--- Monetary fields use NUMERIC rather than FLOAT to avoid binary floating-point rounding.
+-- Dialect: MySQL 8.0+
+-- Load the source CSV into retail_sales after creating the table.
+-- Monetary fields use DECIMAL to avoid binary floating-point rounding.
 
 CREATE DATABASE sql_project_p2;
 
--- Table setup. Run this DROP/CREATE block only when you intend to rebuild the table.
+-- Run this DROP/CREATE block only when intentionally rebuilding the table.
 DROP TABLE IF EXISTS retail_sales;
 CREATE TABLE retail_sales (
     transaction_id INT PRIMARY KEY,
@@ -16,9 +16,9 @@ CREATE TABLE retail_sales (
     age INT,
     category VARCHAR(30),
     quantity INT,
-    price_per_unit NUMERIC(12, 2),
-    cogs NUMERIC(12, 2),
-    total_sale NUMERIC(12, 2)
+    price_per_unit DECIMAL(12, 2),
+    cogs DECIMAL(12, 2),
+    total_sale DECIMAL(12, 2)
 );
 
 -- Initial data checks
@@ -33,14 +33,16 @@ FROM retail_sales
 WHERE transaction_id IS NULL
    OR sale_date IS NULL
    OR sale_time IS NULL
+   OR customer_id IS NULL
    OR gender IS NULL
+   OR age IS NULL
    OR category IS NULL
    OR quantity IS NULL
    OR price_per_unit IS NULL
    OR cogs IS NULL
    OR total_sale IS NULL;
 
--- Check impossible/ suspicious values separately before cleaning.
+-- Check impossible/suspicious values separately before cleaning.
 SELECT *
 FROM retail_sales
 WHERE quantity <= 0
@@ -50,8 +52,8 @@ WHERE quantity <= 0
    OR age < 0;
 
 -- Do not run a destructive DELETE until the rows above have been reviewed and backed up.
--- If the business rule explicitly says to exclude incomplete rows, use a transaction:
--- BEGIN;
+-- If business rules require excluding incomplete rows, execute a reviewed DELETE in a transaction.
+-- START TRANSACTION;
 -- DELETE FROM retail_sales
 -- WHERE sale_date IS NULL
 --    OR sale_time IS NULL
@@ -63,22 +65,22 @@ WHERE quantity <= 0
 --    OR price_per_unit IS NULL
 --    OR cogs IS NULL
 --    OR total_sale IS NULL;
--- -- Verify the affected row count before COMMIT; otherwise ROLLBACK.
+-- -- Verify affected rows, then COMMIT; use ROLLBACK if the result is unexpected.
 -- COMMIT;
 
 -- Q1. Retrieve all transactions made on 5 November 2022.
 SELECT *
 FROM retail_sales
-WHERE sale_date = DATE '2022-11-05'
+WHERE sale_date = '2022-11-05'
 ORDER BY sale_time;
 
 -- Q2. Which Clothing transactions sold more than 10 units in November 2022?
--- Half-open date range is index-friendly and avoids applying a function to sale_date.
+-- A half-open date range can use an index on sale_date.
 SELECT *
 FROM retail_sales
 WHERE category = 'Clothing'
-  AND sale_date >= DATE '2022-11-01'
-  AND sale_date < DATE '2022-12-01'
+  AND sale_date >= '2022-11-01'
+  AND sale_date < '2022-12-01'
   AND quantity > 10
 ORDER BY sale_date, sale_time;
 
@@ -115,17 +117,16 @@ GROUP BY category, gender
 ORDER BY category, total_sales DESC;
 
 -- Q7. Which month has the highest total sales in each year?
--- Also return average transaction value so "best month" is based on total sales,
--- not accidentally on average transaction size alone.
+-- The ranking uses total sales, not average transaction value alone.
 WITH monthly_sales AS (
     SELECT
-        EXTRACT(YEAR FROM sale_date)::INT AS sale_year,
-        EXTRACT(MONTH FROM sale_date)::INT AS sale_month,
+        YEAR(sale_date) AS sale_year,
+        MONTH(sale_date) AS sale_month,
         SUM(total_sale) AS total_sales,
         AVG(total_sale) AS average_transaction_value,
         COUNT(*) AS transaction_count
     FROM retail_sales
-    GROUP BY EXTRACT(YEAR FROM sale_date), EXTRACT(MONTH FROM sale_date)
+    GROUP BY YEAR(sale_date), MONTH(sale_date)
 ),
 ranked_months AS (
     SELECT
@@ -153,6 +154,7 @@ SELECT
     COUNT(*) AS transaction_count,
     SUM(quantity) AS units_purchased
 FROM retail_sales
+WHERE customer_id IS NOT NULL
 GROUP BY customer_id
 ORDER BY total_sales DESC
 LIMIT 5;
@@ -171,8 +173,8 @@ WITH sales_by_shift AS (
     SELECT
         *,
         CASE
-            WHEN sale_time < TIME '12:00:00' THEN 'Morning'
-            WHEN sale_time < TIME '18:00:00' THEN 'Afternoon'
+            WHEN sale_time < '12:00:00' THEN 'Morning'
+            WHEN sale_time < '18:00:00' THEN 'Afternoon'
             ELSE 'Evening'
         END AS shift
     FROM retail_sales
@@ -204,17 +206,17 @@ ORDER BY revenue_share_percentage DESC;
 
 -- Q12. How do sales vary by weekday? Useful for staffing and campaign planning.
 SELECT
-    EXTRACT(ISODOW FROM sale_date)::INT AS weekday_number,
-    TO_CHAR(sale_date, 'Dy') AS weekday_name,
+    DAYOFWEEK(sale_date) AS weekday_number,
+    DAYNAME(sale_date) AS weekday_name,
     COUNT(*) AS transaction_count,
     SUM(total_sale) AS total_sales,
     ROUND(AVG(total_sale), 2) AS average_transaction_value
 FROM retail_sales
-GROUP BY EXTRACT(ISODOW FROM sale_date), TO_CHAR(sale_date, 'Dy')
+GROUP BY DAYOFWEEK(sale_date), DAYNAME(sale_date)
 ORDER BY weekday_number;
 
--- Q13. What share of customers' sales comes from the top 20% of customers?
--- This is a concentration diagnostic; interpret it alongside customer count and period.
+-- Q13. How concentrated are sales among the highest-spending 20% of customers?
+-- NTILE creates five approximately equal-sized customer groups.
 WITH customer_sales AS (
     SELECT customer_id, SUM(total_sale) AS total_sales
     FROM retail_sales

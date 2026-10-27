@@ -26,7 +26,7 @@ SELECT
   transactions,
   sales,
   ROUND(
-      sales / transactions,
+      sales / NULLIF(transactions, 0),
       2
    ) AS avg_transaction
 FROM weekly_sales;

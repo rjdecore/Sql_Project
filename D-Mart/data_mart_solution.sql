@@ -110,7 +110,7 @@ SELECT
   ROUND(
     (
       100 * SUM(sales)/
-        SUM(SUM(SALES)) OVER (PARTITION BY demographic)
+        SUM(SUM(sales)) OVER (PARTITION BY calendar_year)
     ),
     2
   ) AS percentage

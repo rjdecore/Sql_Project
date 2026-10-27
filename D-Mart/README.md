@@ -100,3 +100,13 @@ The project demonstrates how SQL can move from raw transactional data to a reusa
 ## Tech Stack
 
 **MySQL | SQL | CTEs | Window Functions | Data Cleaning | Business Analysis**
+
+
+## Findings to Report
+Use the query outputs to identify the missing-week pattern, changes in sales by period, region and platform, and differences by age-band/demographic segment. Record exact values only from a successful query run; this README does not invent result totals.
+
+## Business Value
+Supports weekly sales monitoring, channel-mix review and customer-segment planning. It also demonstrates reusable SQL cleaning before business analysis.
+
+## Case Study / Report
+[Open the case-study PDF](Case%20Study%201%20Data%20Mart.pdf) and the [SQL solutions](data_mart_solution.sql).

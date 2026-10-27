@@ -29,3 +29,12 @@ The project uses three core entities:
 
 ## Tech Stack
 **SQL | PostgreSQL/MySQL | Joins | Aggregations | Customer Analytics | Inventory Analysis**
+
+## Findings to Report
+Use the query results to identify top-selling genres/books, high-spend customers, revenue totals and low-stock items. Numeric findings should be recorded from the executed queries, not estimated from the question text.
+
+## Business Value
+Supports product assortment decisions, customer-value analysis and inventory replenishment planning.
+
+## Report Artifact
+No project-specific PDF was identified; the schema, data and SQL queries are the reproducible deliverables.

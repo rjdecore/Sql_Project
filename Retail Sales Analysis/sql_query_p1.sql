@@ -31,13 +31,13 @@ FROM retail_sales;
 
 -- Data Cleaning
 SELECT * FROM retail_sales
-WHERE transaction_id IS NULL
+WHERE transaction_id IS NULL;
 
 SELECT * FROM retail_sales
-WHERE sale_date IS NULL
+WHERE sale_date IS NULL;
 
 SELECT * FROM retail_sales
-WHERE sale_time IS NULL
+WHERE sale_time IS NULL;
 
 SELECT * FROM retail_sales
 WHERE 
@@ -79,15 +79,15 @@ WHERE
 -- Data Exploration
 
 -- How many sales we have?
-SELECT COUNT(*) as total_sale FROM retail_sales
+SELECT COUNT(*) AS total_sale FROM retail_sales;
 
 -- How many uniuque customers we have ?
 
-SELECT COUNT(DISTINCT customer_id) AS unique_customers FROM retail_sales
+SELECT COUNT(DISTINCT customer_id) AS unique_customers FROM retail_sales;
 
 
 
-SELECT DISTINCT category FROM retail_sales
+SELECT DISTINCT category FROM retail_sales;
 
 
 -- Data Analysis & Business Key Problems & Answers
@@ -139,13 +139,13 @@ GROUP BY 1;
 SELECT
     ROUND(AVG(age), 2) as avg_age
 FROM retail_sales
-WHERE category = 'Beauty'
+WHERE category = 'Beauty';
 
 
 -- Q.5 Write a SQL query to find all transactions where the total_sale is greater than 1000.
 
 SELECT * FROM retail_sales
-WHERE total_sale > 1000
+WHERE total_sale > 1000;
 
 
 -- Q.6 Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.

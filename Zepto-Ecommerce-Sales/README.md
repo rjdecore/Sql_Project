@@ -27,3 +27,12 @@ The project covers a realistic analyst workflow:
 
 ## Tech Stack
 **PostgreSQL | SQL | Data Cleaning | E-commerce Analytics | Inventory Analysis | Pricing Analytics**
+
+## Findings & Business Value
+The query set examines product pricing and discounting, category mix, stock status and estimated inventory value. Use the executed results to identify low-stock products, discount patterns and high-value stock; do not describe inventory value as realized sales revenue.
+
+## Business Use
+Supports pricing review, stock-prioritization and category-level inventory analysis. Decisions should consider data freshness, stock availability and the business definition of price/value.
+
+## Case Study / PDF
+[Open the Zepto SQL solution PDF](Zepto_sol.pdf) and use the SQL files plus CSV data to reproduce the results.

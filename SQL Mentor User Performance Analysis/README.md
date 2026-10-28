@@ -31,12 +31,3 @@ A useful practice project for explaining ranking problems, conditional aggregati
 
 ## Tech Stack
 **SQL | CTEs | Window Functions | Conditional Aggregation | Date Analysis**
-
-## Findings & Business Value
-Query outputs can identify users with the most submissions/points, top daily and weekly performers, average daily scores and users with many incorrect submissions. Report exact names and scores only from the executed query results.
-
-## Business Value
-Learning-platform teams can monitor engagement and performance, spot users who may need support and recognize consistently active learners. Scores should be interpreted alongside participation and question difficulty.
-
-## Report Artifact
-No project-specific PDF was identified in the folder; the SQL script and dataset are the reproducible artifacts.

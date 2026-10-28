@@ -26,12 +26,3 @@ The project includes:
 
 ## Tech Stack
 **SQL | CTEs | Window Functions | Time-Series Analysis | Ranking | Automotive Analytics**
-
-## Findings & Business Value
-The queries compare average selling price by fuel type, model mileage, listings above/below average, price trends and rankings by transmission/year. Quote specific models and values only from executed query results; the data describes the supplied used-car dataset.
-
-## Business Value
-This analysis can help compare used-car listings, explore price/mileage trade-offs and identify records for further inspection.
-
-## Report Artifact
-No project-specific PDF was identified in this folder; use the SQL file and source dataset.

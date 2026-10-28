@@ -28,12 +28,3 @@ The project includes:
 
 ## Tech Stack
 **Python/Pandas | MySQL | SQL | CTEs | Window Functions | Stored Procedures | Business Analytics**
-
-## Findings & Business Value
-The analysis is designed to compare funding by industry/season, offer-to-deal conversion, founder representation, investment per deal and investor portfolio diversification. Populate exact industry/shark rankings from executed query results; investment amounts and ROI definitions must be stated explicitly.
-
-## Business Value
-The project demonstrates a way to summarize investment patterns and compare investor strategies. Historical show deals are descriptive and should not be interpreted as guaranteed investment returns.
-
-## Report Artifact
-No project-specific PDF was identified in the folder; use the SQL, notebook and data files to reproduce the analysis.
